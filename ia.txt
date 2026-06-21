@@ -2,3 +2,6 @@
 Prompt: "Importa el array stickers que es el de stickers.js para añadir un console.log(stickers) dentro del componente para verificar que los datos se lean correctamente."
 Resultado: Me genero la infraestructura completa para verificar que los datos cargen pero yo hice la carpeta data.
 
+=== Etapa 2 ===
+Prompt: "El componente debe recibir cuatro pops: number (puede usar el code de la data), name, group y status. Diseña el retorno de la función (JSX) para que muestre de forma ordenada y limpia el número, el nombre del personaje y su grupo. Agrega logica de estilos dinámicos (usando estilos en linea style={...} o clases de CSS) para que el contenedor cambie de color de fondo segun el valor de la prop status: -Si es "tengo", el fondo debe ser verde, si es "repetida" el fondo debe ser amarillo y si es "falta" el fondo debe ser gris. Regresa a App.jsx. En lugar de la consola, renderiza manualmente 5 componentes <StickerCard/> pasandoles los datos del array e inventandoles diferentes estados (status="tengo",status="falta", etc.) para verificar que los colores cambien en pantalla."
+Resultado: Dejo listo el componente para recibir los props y muestra los datos de forma ordenada en stickercard.jsx y también reemplazo la consola en app.jsx por los cincos renderizados manuales de StickerCard.
