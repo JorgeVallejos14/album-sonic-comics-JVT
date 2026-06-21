@@ -1,16 +1,46 @@
 import { stickers } from './data/stickers'
 import StickerCard from './components/StickerCard'
-import { useState } from 'react'
+import AlbumSummary from './components/AlbumSummary'
+import { useEffect, useState } from 'react'
+
+const STORAGE_KEY = 'album-sonic-collection'
+
+function createInitialCollection() {
+	const emptyCollection = stickers.reduce((accumulator, sticker) => {
+		accumulator[sticker.id] = 'falta'
+		return accumulator
+	}, {})
+
+	if (typeof window === 'undefined') {
+		return emptyCollection
+	}
+
+	const storedCollection = window.localStorage.getItem(STORAGE_KEY)
+
+	if (!storedCollection) {
+		return emptyCollection
+	}
+
+	try {
+		const parsedCollection = JSON.parse(storedCollection)
+
+		return stickers.reduce((accumulator, sticker) => {
+			accumulator[sticker.id] = parsedCollection?.[sticker.id] ?? 'falta'
+			return accumulator
+		}, {})
+	} catch {
+		return emptyCollection
+	}
+}
 
 function App() {
-	const [collection, setCollection] = useState(() =>
-		stickers.reduce((accumulator, sticker) => {
-			accumulator[sticker.id] = 'falta'
-			return accumulator
-		}, {}),
-	)
+	const [collection, setCollection] = useState(createInitialCollection)
 	const [searchText, setSearchText] = useState('')
 	const [selectedStatus, setSelectedStatus] = useState('Todas')
+
+	useEffect(() => {
+		window.localStorage.setItem(STORAGE_KEY, JSON.stringify(collection))
+	}, [collection])
 
 	const handleStatusChange = (id) => {
 		setCollection((currentCollection) => {
@@ -89,6 +119,7 @@ function App() {
 				<p style={{ margin: 0, fontWeight: 700, color: '#374151' }}>
 					Láminas visibles: {visibleStickers.length}
 				</p>
+				<AlbumSummary collection={collection} />
 			</section>
 
 			<section style={{
