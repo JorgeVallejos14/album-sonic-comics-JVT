@@ -1,7 +1,31 @@
 import { stickers } from './data/stickers'
 import StickerCard from './components/StickerCard'
+import { useState } from 'react'
 
 function App() {
+	const [collection, setCollection] = useState(() =>
+		stickers.reduce((accumulator, sticker) => {
+			accumulator[sticker.id] = 'falta'
+			return accumulator
+		}, {}),
+	)
+
+	const handleStatusChange = (id) => {
+		setCollection((currentCollection) => {
+			const currentStatus = currentCollection[id]
+			const nextStatus = {
+				falta: 'tengo',
+				tengo: 'repetida',
+				repetida: 'falta',
+			}[currentStatus]
+
+			return {
+				...currentCollection,
+				[id]: nextStatus,
+			}
+		})
+	}
+
 	return (
 		<main style={{
 			minHeight: '100vh',
@@ -16,11 +40,17 @@ function App() {
 				maxWidth: '1100px',
 				margin: '0 auto',
 			}}>
-				<StickerCard number={stickers[0].code} name={stickers[0].name} group={stickers[0].group} status="tengo" />
-				<StickerCard number={stickers[1].code} name={stickers[1].name} group={stickers[1].group} status="falta" />
-				<StickerCard number={stickers[2].code} name={stickers[2].name} group={stickers[2].group} status="repetida" />
-				<StickerCard number={stickers[3].code} name={stickers[3].name} group={stickers[3].group} status="tengo" />
-				<StickerCard number={stickers[4].code} name={stickers[4].name} group={stickers[4].group} status="falta" />
+				{stickers.map((sticker) => (
+					<StickerCard
+						key={sticker.id}
+						id={sticker.id}
+						number={sticker.code}
+						name={sticker.name}
+						group={sticker.group}
+						status={collection[sticker.id]}
+						onStatusChange={handleStatusChange}
+					/>
+				))}
 			</section>
 		</main>
 	)

@@ -13,7 +13,7 @@ const statusStyles = {
 	},
 }
 
-function StickerCard({ number, name, group, status }) {
+function StickerCard({ id, number, name, group, status, onStatusChange }) {
 	const cardStyle = {
 		...statusStyles[status],
 		padding: '1rem',
@@ -21,6 +21,7 @@ function StickerCard({ number, name, group, status }) {
 		boxShadow: '0 10px 24px rgba(0, 0, 0, 0.12)',
 		border: '1px solid rgba(255, 255, 255, 0.18)',
 		minWidth: '220px',
+		cursor: 'pointer',
 	}
 
 	const labelStyle = {
@@ -36,7 +37,7 @@ function StickerCard({ number, name, group, status }) {
 	}
 
 	return (
-		<article style={cardStyle}>
+		<article style={cardStyle} onClick={() => onStatusChange(id)}>
 			<span style={labelStyle}>{status}</span>
 			<div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.35rem' }}>Sticker #{number}</div>
 			<h3 style={{ margin: '0 0 0.5rem', fontSize: '1.35rem', lineHeight: 1.1 }}>{name}</h3>
