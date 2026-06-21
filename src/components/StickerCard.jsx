@@ -16,6 +16,7 @@ const statusStyles = {
 function StickerCard({ id, number, name, group, status, onStatusChange }) {
 	const cardStyle = {
 		...statusStyles[status],
+		color: '#111827',
 		padding: '1rem',
 		borderRadius: '16px',
 		boxShadow: '0 10px 24px rgba(0, 0, 0, 0.12)',
@@ -29,7 +30,8 @@ function StickerCard({ id, number, name, group, status, onStatusChange }) {
 		marginBottom: '0.5rem',
 		padding: '0.25rem 0.6rem',
 		borderRadius: '999px',
-		backgroundColor: 'rgba(255, 255, 255, 0.2)',
+		backgroundColor: 'rgba(255, 255, 255, 0.8)',
+		color: '#111827',
 		fontSize: '0.78rem',
 		fontWeight: 700,
 		textTransform: 'uppercase',
@@ -39,9 +41,9 @@ function StickerCard({ id, number, name, group, status, onStatusChange }) {
 	return (
 		<article style={cardStyle} onClick={() => onStatusChange(id)}>
 			<span style={labelStyle}>{status}</span>
-			<div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.35rem' }}>Sticker #{number}</div>
-			<h3 style={{ margin: '0 0 0.5rem', fontSize: '1.35rem', lineHeight: 1.1 }}>{name}</h3>
-			<p style={{ margin: 0, fontSize: '0.95rem', fontWeight: 600 }}>Grupo: {group}</p>
+			<div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.35rem', fontWeight: 600 }}>Sticker #{number}</div>
+			<h3 style={{ margin: '0 0 0.5rem', fontSize: '1.35rem', lineHeight: 1.1, fontWeight: 800 }}>{name}</h3>
+			<p style={{ margin: 0, fontSize: '0.95rem', fontWeight: 700 }}>Grupo: {group}</p>
 		</article>
 	)
 }
