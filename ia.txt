@@ -1,0 +1,4 @@
+=== Etapa 1 ===
+Prompt: "Importa el array stickers que es el de stickers.js para añadir un console.log(stickers) dentro del componente para verificar que los datos se lean correctamente."
+Resultado: Me genero la infraestructura completa para verificar que los datos cargen pero yo hice la carpeta data.
+
